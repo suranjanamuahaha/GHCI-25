@@ -226,9 +226,12 @@ function NGOFields({ register, errors }: any) {
 // ----------------------
 // Main AuthModal component
 // ----------------------
-
-export default function AuthModalTemplate() {
-  const [open, setOpen] = useState(true); // modal shown by default for demo
+interface AuthProps {
+  onClose: () => void;
+}
+//export default function AuthModalTemplate() {
+const Auth: React.FC<AuthProps> = ({ onClose }) => {
+  // modal shown by default for demo
   const [mode, setMode] = useState<"login" | "signup">("signup");
   const [role, setRole] = useState<"volunteer" | "ngo">("volunteer");
 
@@ -272,7 +275,7 @@ export default function AuthModalTemplate() {
         alert("NGO signup payload logged to console.");
       }
       // on success, close modal / redirect to dashboard
-      setOpen(false);
+      onClose();
     } catch (err: any) {
       // zod errors will be thrown when parse fails - we just log here for demo
       console.error(err);
@@ -281,15 +284,16 @@ export default function AuthModalTemplate() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+   
       <AnimatePresence>
-        {open && (
+       
           <motion.div
             key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 flex items-center justify-center bg-black/40"
+            onClick={onClose}
           >
             <motion.div
               key="modal"
@@ -297,14 +301,15 @@ export default function AuthModalTemplate() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="z-50 w-full max-w-3xl rounded-xl bg-white shadow-xl"
+              className="z-60 w-full max-w-3xl rounded-xl bg-white shadow-xl"
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="flex">
                 {/* Left: content */}
                 <div className="w-full p-6">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">Welcome</h3>
-                    <button onClick={() => setOpen(false)} className="text-sm text-gray-500">
+                      <button onClick={onClose} className="text-sm text-gray-500">
                       Close
                     </button>
                   </div>
@@ -407,15 +412,9 @@ export default function AuthModalTemplate() {
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
+          </AnimatePresence>
+        );
+    };
+      
 
-      {/* Demo trigger to re-open modal */}
-      {!open && (
-        <button onClick={() => setOpen(true)} className="mt-6 rounded-md bg-blue-600 px-4 py-2 text-white">
-          Re-open Auth Modal
-        </button>
-      )}
-    </div>
-  );
-}
+   export default Auth;  
