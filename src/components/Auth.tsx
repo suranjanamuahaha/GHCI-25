@@ -292,7 +292,7 @@ const Auth: React.FC<AuthProps> = ({ onClose }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 flex items-center justify-center bg-black/40"
+            className="fixed inset-0 z-60 flex items-center justify-center bg-black/40"
             onClick={onClose}
           >
             <motion.div
@@ -301,12 +301,12 @@ const Auth: React.FC<AuthProps> = ({ onClose }) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="z-60 w-full max-w-3xl rounded-xl bg-white shadow-xl"
+              className="relative w-full max-w-3xl rounded-xl bg-white shadow-xl max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex">
                 {/* Left: content */}
-                <div className="w-full p-6">
+                  <div className="w-full p-8">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">Welcome</h3>
                       <button onClick={onClose} className="text-sm text-gray-500">
@@ -393,23 +393,10 @@ const Auth: React.FC<AuthProps> = ({ onClose }) => {
                     )}
                   </div>
                 </div>
+                </div>
 
                 {/* Right: small info / branding */}
-                <div className="hidden w-1/3 flex-none flex-col items-center justify-center gap-4 rounded-r-xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:flex">
-                  <div className="text-center">
-                    <h4 className="text-lg font-semibold">Volunteer Portal</h4>
-                    <p className="mt-2 text-sm text-gray-600">Join to mentor, track student progress and donate to nearby NGOs.</p>
-                  </div>
-
-                  <div className="w-full text-left">
-                    <ul className="list-disc pl-4 text-sm text-gray-700">
-                      <li>Role-based signup (Volunteer / NGO)</li>
-                      <li>Volunteer creates student profiles after signup</li>
-                      <li>Future: AI insights and matching</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                
             </motion.div>
           </motion.div>
           </AnimatePresence>
