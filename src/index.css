@@ -4,6 +4,31 @@
 :root{
   font-family: "Inter", sans-serif;
 }
+
+.slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+
+.sliders .slick-prev::before,
+.sliders .slick-next::before {
+  color: #000000;
+}
+
+.slick-slide {
+    transition: transform 0.5s ease; /* Apply transition to all slides */
+}
+
+.slick-slide.slick-center {
+        transform: scale(1.1);
+        /* transition: transform 0.5s ease; */
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    }
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
